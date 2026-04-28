@@ -55,16 +55,7 @@ markie-cadag-web/
 npm install
 ```
 
-2. Configure environment variables in `.env`:
-
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=
-DB_NAME=markiecadag_db
-PORT=3307
-JWT_SECRET=your_secret_here
-```
+2. Configure environment variables in `.env`
 
 3. Start the server:
 
