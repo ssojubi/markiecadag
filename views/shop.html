@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop — Fashion Brand</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/shop.css" />
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">BRAND</a>
+    <div class="nav-links">
+      <a href="/shop">Shop</a>
+      <a href="/cart">Cart (<span id="cart-count">0</span>)</a>
+      <a href="/login" id="nav-login">Login</a>
+      <a href="#" id="nav-logout" style="display:none;">Logout</a>
+    </div>
+  </nav>
+
+  <section class="shop-page">
+    <div class="filters">
+      <button class="filter-btn active" data-category="">All</button>
+      <button class="filter-btn" data-category="tops">Tops</button>
+      <button class="filter-btn" data-category="bottoms">Bottoms</button>
+      <button class="filter-btn" data-category="dresses">Dresses</button>
+      <button class="filter-btn" data-category="accessories">Accessories</button>
+    </div>
+    <div class="product-grid" id="product-list"></div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/shop.js"></script>
+</body>
+</html>

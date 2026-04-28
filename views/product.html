@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crimson Elegance Gown — Markie Cadag Fashion</title>
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+
+<div class="announcement-bar">
+  Limited editions · 30 pieces per design: 10 Small · 10 Medium · 10 Large
+</div>
+
+<header class="navbar">
+  <div class="navbar-top">
+    <a href="index.html" class="navbar-brand">
+      <img src="public/images/mc.jpg" alt="Markie Cadag Logo" class="logo-img">
+      <div class="brand-text">
+        <span class="brand-name">Markie Cadag</span>
+        <span class="brand-tagline">Fashion House · Est. 2010</span>
+      </div>
+    </a>
+    <div class="navbar-actions">
+      <a href="login.html">Sign In</a>
+      <a href="register.html">Register</a>
+      <a href="cart.html" class="cart-icon" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+  <nav class="navbar-nav">
+    <a href="index.html">Home</a>
+    <a href="custom.html">Custom-Made Couture</a>
+    <a href="rtw.html" class="active">Fashion Collection</a>
+    <a href="filipiniana.html">Barong & Filipiniana</a>
+    <a href="kidsandteens.html">Kids & Teens</a>
+    <a href="santo.html">Other Services</a>
+    <a href="about.html">About Us</a>
+  </nav>
+</header>
+
+<!-- BREADCRUMB -->
+<div style="padding:1rem 2.5rem;font-size:0.75rem;color:var(--muted);border-bottom:1px solid var(--border);">
+  <a href="index.html" style="color:var(--muted);">Home</a> /
+  <a href="rtw.html" style="color:var(--muted);"> Fashion Collection</a> /
+  <span style="color:var(--dark);"> Crimson Elegance Gown</span>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="product-detail">
+  <!-- IMAGES -->
+  <div class="product-detail-images">
+    <div class="product-detail-main-image">
+      <img src="public/images/dressred.jpg" alt="Crimson Elegance Gown" id="mainImg">
+    </div>
+    <div class="product-detail-thumbs">
+      <img src="public/images/dressred.jpg" alt="View 1" class="active" onclick="setMain(this)">
+      <img src="public/images/dresssuzaine.jpg" alt="View 2" onclick="setMain(this)">
+      <img src="public/images/dressred.jpg" alt="View 3" onclick="setMain(this)">
+    </div>
+  </div>
+
+  <!-- PRODUCT INFO -->
+  <div class="product-info">
+    <span class="product-info-brand">Markie Cadag Fashion · RTW Collection</span>
+    <h1>Crimson Elegance Gown</h1>
+    <p class="price">₱4,500</p>
+
+    <div class="stock-info">
+      <span>Stock per size (limited to 10 per size):</span>
+      Small: <strong>8 remaining</strong> &nbsp;·&nbsp;
+      Medium: <strong>5 remaining</strong> &nbsp;·&nbsp;
+      Large: <strong>10 remaining</strong>
+    </div>
+
+    <label for="size">Select Size</label>
+    <select id="size" name="size">
+      <option value="">— Choose Size —</option>
+      <option value="S">Small (8 available)</option>
+      <option value="M">Medium (5 available)</option>
+      <option value="L">Large (10 available)</option>
+    </select>
+
+    <label for="qty">Quantity</label>
+    <input type="number" id="qty" name="qty" min="1" max="3" value="1" placeholder="1">
+
+    <div class="product-info-note">
+      ⚠️ Each design is limited to 30 pieces total (10 per size). Size adjustments are available — alteration fees are shouldered by the client.
+    </div>
+
+    <div class="product-info-actions">
+      <button class="btn btn-gold w-full" onclick="addToCart()">Add to Cart</button>
+      <a href="checkout.html" class="btn btn-dark w-full" onclick="addToCart()">Buy Now</a>
+    </div>
+
+    <div style="margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.5rem;">
+      <p style="font-size:0.8rem;color:var(--muted);line-height:1.8;">
+        <strong style="color:var(--mid);">Material:</strong> Premium crepe with satin lining<br>
+        <strong style="color:var(--mid);">Care:</strong> Dry clean only<br>
+        <strong style="color:var(--mid);">Origin:</strong> Handcrafted in the Philippines<br>
+        <strong style="color:var(--mid);">Delivery:</strong> Via integrated logistics courier (3–7 business days)
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED PRODUCTS -->
+<section class="section bg-cream">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">You May Also Like</span>
+      <h2>More From This Collection</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="public/images/dresssuzaine.jpg" alt="Suzaine">
+          <div class="product-card-overlay">
+            <a href="product.html" class="btn btn-gold">View Details</a>
+          </div>
+        </div>
+        <div class="product-card-info">
+          <span class="category">Cocktail Dress</span>
+          <h3>Suzaine Cocktail Dress</h3>
+          <p class="price">₱3,800</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="public/images/barong.jpg" alt="Barong">
+          <div class="product-card-overlay">
+            <a href="product.html" class="btn btn-gold">View Details</a>
+          </div>
+        </div>
+        <div class="product-card-info">
+          <span class="category">Barong & Filipiniana</span>
+          <h3>Classic Barong Tagalog</h3>
+          <p class="price">₱3,200</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="public/images/kids.jpg" alt="Kids">
+          <div class="product-card-overlay">
+            <a href="product.html" class="btn btn-gold">View Details</a>
+          </div>
+        </div>
+        <div class="product-card-info">
+          <span class="category">Kids & Teens</span>
+          <h3>Bloom Filipiniana Set</h3>
+          <p class="price">₱1,800</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-name" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;letter-spacing:0.05em;">Markie Cadag Fashion</span>
+      <p>Bespoke Filipino couture crafted with love, passion, and precision. Proudly Philippine-made since 2010.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <a href="custom.html">Custom-Made Couture</a>
+      <a href="rtw.html">Fashion Collection</a>
+      <a href="filipiniana.html">Barong & Filipiniana</a>
+      <a href="kidsandteens.html">Kids & Teens</a>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <a href="login.html">Sign In</a>
+      <a href="register.html">Register</a>
+      <a href="cart.html">Shopping Cart</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="about.html">About Us</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Markie Cadag Fashion. All rights reserved.</span>
+  </div>
+</footer>
+
+<div class="chat-widget">
+  <button class="chat-btn" title="Customer Support">💬</button>
+</div>
+
+<script>
+  // Cart count
+  let cart = JSON.parse(localStorage.getItem('mc_cart') || '[]');
+  const cartCount = document.querySelector('.cart-count');
+  function updateCount() {
+    if (cartCount) cartCount.textContent = cart.reduce((a, i) => a + (i.qty || 1), 0);
+  }
+  updateCount();
+
+  // Image switcher
+  function setMain(el) {
+    document.getElementById('mainImg').src = el.src;
+    document.querySelectorAll('.product-detail-thumbs img').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Add to cart
+  function addToCart() {
+  const select = document.getElementById('size');
+  const variant_id = select.value;
+  const qty = parseInt(document.getElementById('qty').value) || 1;
+  if (!variant_id) { alert('Please select a size.'); return false; }
+
+  const selectedOption = select.options[select.selectedIndex];
+  const stock = parseInt(selectedOption.dataset.stock);
+  if (qty > stock) { alert(`Only ${stock} items available.`); return false; }
+
+  const cart = JSON.parse(localStorage.getItem('mc_cart') || '[]');
+  const existing = cart.find(i => i.variant_id === variant_id);
+  if (existing) { existing.qty += qty; } 
+  else {
+    cart.push({
+      variant_id,
+      name: document.querySelector('.product-info h1').textContent,
+      size: selectedOption.textContent.trim(),
+      price: parseFloat(document.querySelector('.price').textContent.replace(/[₱,]/g, '')),
+      qty,
+      img: document.getElementById('mainImg').src,
+    });
+  }
+  localStorage.setItem('mc_cart', JSON.stringify(cart));
+  document.querySelector('.cart-count').textContent = cart.reduce((a, i) => a + i.qty, 0);
+  return true;
+}
+  async function loadProduct() {
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) return;
+
+  const res = await fetch(`/api/products/${id}`);
+  const p = await res.json();
+
+  document.querySelector('.product-info h1').textContent = p.name;
+  document.querySelector('.price').textContent = '₱' + Number(p.price).toLocaleString();
+  document.getElementById('mainImg').src = `/uploads/${p.image}`;
+
+  // Populate size dropdown from variants
+  const select = document.getElementById('size');
+  select.innerHTML = '<option value="">— Choose Size —</option>' +
+    p.variants.map(v =>
+      `<option value="${v.id}" data-stock="${v.stock}">
+        ${v.size}${v.color ? ' / ' + v.color : ''} (${v.stock} available)
+      </option>`
+    ).join('');
+}
+
+loadProduct();
+</script>
+
+</body>
+</html>

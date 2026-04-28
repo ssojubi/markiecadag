@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTW Collection</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="announcement-bar">RTW stock is limited to 30 pieces per design: 10 small, 10 medium, 10 large</div>
+  <header class="navbar">
+    <div class="navbar-top">
+      <a href="/" class="navbar-brand">
+        <img src="/images/mc.jpg" alt="Markie Cadag logo" class="logo-img">
+        <div class="brand-text"><span class="brand-name">Markie Cadag</span><span class="brand-tagline">Ready-to-Wear</span></div>
+      </a>
+      <div class="navbar-actions">
+        <a href="/register">VIP Sign-up</a>
+        <a href="/cart" class="cart-icon" title="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 01-8 0"></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+    <nav class="navbar-nav">
+      <a href="/">Home</a>
+      <a href="/custom">Custom Couture</a>
+      <a href="/rtw" class="active">RTW</a>
+      <a href="/filipiniana">Barong & Filipiniana</a>
+      <a href="/kidsandteens">Kids & Teen</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <section class="shop-header">
+    <span class="section-eyebrow">Ready to Wear</span>
+    <h1>Women and menswear drops with limited release sizing</h1>
+    <p data-vip-status>Join VIP for 75% off RTW</p>
+    <div class="hero-cta" style="justify-content:center;margin-top:1.5rem;">
+      <button type="button" class="btn btn-gold" data-action="vip-toggle">Activate VIP</button>
+      <a href="/checkout" class="btn btn-outline">Go to Checkout</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">By Gender</span>
+        <h2>RTW product showcase</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gender-strip">
+        <div class="compliance-badge">Women</div>
+        <div class="compliance-badge">Men</div>
+        <div class="compliance-badge">Unisex Capsule</div>
+      </div>
+      <div class="product-grid" id="rtw-grid"></div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card"><h3>Alteration Policy</h3><p>Size adjustments after purchase are available. Alteration fees are quoted separately and shouldered by the client.</p></div>
+        <div class="service-card"><h3>Payment Gateway Options</h3><p>Checkout supports GCash, Maya, card, bank transfer, and COD selection in a single order flow.</p></div>
+        <div class="service-card"><h3>Courier Delivery</h3><p>Standard and express shipping options are available at checkout for nationwide dispatch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom">
+      <span>© 2026 Markie Cadag Fashion. All rights reserved.</span>
+      <div><a href="/privacy">Privacy Policy</a><a href="/terms">Terms & Conditions</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+  <script>
+    const products = [
+      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Small', stock: 10, sku: 'RTW-CRIMSON-S' },
+      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Medium', stock: 10, sku: 'RTW-CRIMSON-M' },
+      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Large', stock: 10, sku: 'RTW-CRIMSON-L' },
+      { name: 'Suzaine Cocktail Dress', category: 'RTW', gender: 'Women', price: 3800, image: '/images/dresssuzaine.jpg', size: 'Small', stock: 10, sku: 'RTW-SUZ-S' },
+      { name: 'Classic Modern Barong Set', category: 'RTW', gender: 'Men', price: 3200, image: '/images/barong2.jpg', size: 'Medium', stock: 10, sku: 'RTW-BARONG-M' },
+      { name: 'Atelier Lounge Terno', category: 'RTW', gender: 'Unisex Capsule', price: 2400, image: '/images/filipiniana1.jpg', size: 'Large', stock: 10, sku: 'RTW-TERNO-L' }
+    ];
+
+    const grid = document.getElementById('rtw-grid');
+    const render = () => {
+      const vip = isVipMember();
+      grid.innerHTML = products.map((product) => {
+        const vipPrice = vip ? Math.round(product.price * 0.25) : product.price;
+        return `
+          <article class="product-card">
+            <div class="product-card-image">
+              <img src="${product.image}" alt="${product.name}">
+              <div class="product-card-badge">${product.gender}</div>
+            </div>
+            <div class="product-card-info">
+              <span class="category">${product.category}</span>
+              <h3>${product.name}</h3>
+              <p class="price">${peso(vipPrice)} ${vip ? '<span class="vip-price-note">VIP applied</span>' : ''}</p>
+              <p class="stock-note">${product.size}: ${product.stock}/10 available</p>
+              <button class="btn btn-dark w-full" type="button" data-sku="${product.sku}">Add to Cart</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('[data-sku]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const product = products.find((item) => item.sku === button.dataset.sku);
+          addStoreItem({ ...product, qty: 1 });
+        });
+      });
+    };
+
+    window.addEventListener('mc:vip-change', render);
+    render();
+  </script>
+</body>
+</html>

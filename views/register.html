@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — Markie Cadag Fashion</title>
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-top">
+    <a href="index.html" class="navbar-brand">
+      <img src="public/images/mc.jpg" alt="Markie Cadag Logo" class="logo-img">
+      <div class="brand-text">
+        <span class="brand-name">Markie Cadag</span>
+        <span class="brand-tagline">Fashion House · Est. 2010</span>
+      </div>
+    </a>
+    <div class="navbar-actions">
+      <a href="login.html">Already have an account? Sign In</a>
+    </div>
+  </div>
+</header>
+
+<div class="auth-page">
+  <h2>Create Account</h2>
+  <p class="subtitle">Join the Markie Cadag family and unlock exclusive benefits</p>
+
+  <div style="background:linear-gradient(135deg,#2a2018,#1c1612);padding:1rem 1.5rem;margin-bottom:2rem;text-align:center;">
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:0.3rem;">VIP Membership</p>
+    <p style="color:rgba(255,255,255,0.7);font-size:0.82rem;">Register now and enjoy <strong style="color:var(--gold-light);">75% off</strong> all Ready-to-Wear items</p>
+  </div>
+
+  <form class="auth-form" onsubmit="handleRegister(event)">
+    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Maria" required>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Santos" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="your@email.com" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+63 9xx xxx xxxx">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Minimum 8 characters" required minlength="8">
+    </div>
+    <div class="form-group">
+      <label for="confirm">Confirm Password</label>
+      <input type="password" id="confirm" placeholder="Repeat your password" required>
+    </div>
+
+    <div style="display:flex;align-items:flex-start;gap:0.5rem;font-size:0.78rem;color:var(--muted);">
+      <input type="checkbox" id="terms" required style="margin-top:3px;accent-color:var(--gold);">
+      <label for="terms">I agree to the <a href="/terms" style="color:var(--gold);">Terms & Conditions</a> and <a href="/privacy" style="color:var(--gold);">Privacy Policy</a></label>
+    </div>
+
+    <div style="display:flex;align-items:flex-start;gap:0.5rem;font-size:0.78rem;color:var(--muted);">
+      <input type="checkbox" id="vip_member" name="vip_member" style="margin-top:3px;accent-color:var(--gold);">
+      <label for="vip_member">Activate VIP membership on this browser and apply 75% discount on RTW items.</label>
+    </div>
+
+    <button type="submit" class="btn btn-gold w-full" style="padding:0.9rem;">Create Account & Join VIP</button>
+    <p class="helper">Already a member? <a href="login.html">Sign in</a></p>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding:1.5rem 2.5rem;max-width:1200px;margin:0 auto;">
+    <span>© 2026 Markie Cadag Fashion. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  async function handleRegister(e) {
+  e.preventDefault();
+  const pw = document.getElementById('password').value;
+  const conf = document.getElementById('confirm').value;
+  if (pw !== conf) { alert('Passwords do not match.'); return; }
+
+  const body = {
+    name: document.getElementById('fname').value + ' ' + document.getElementById('lname').value,
+    email: document.getElementById('email').value,
+    password: pw,
+    phone: document.getElementById('phone').value,
+  };
+
+  const res = await fetch('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (res.ok) {
+    localStorage.setItem('mc_vip_member', document.getElementById('vip_member').checked ? 'true' : 'false');
+    alert(data.message);
+    window.location.href = 'login.html';
+  } else {
+    alert(data.message);
+  }
+}
+</script>
+
+</body>
+</html>

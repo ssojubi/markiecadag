@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="announcement-bar">Integrated payment gateway selections and courier methods are enabled on this checkout</div>
+  <header class="navbar">
+    <div class="navbar-top">
+      <a href="/" class="navbar-brand">
+        <img src="/images/mc.jpg" alt="Markie Cadag logo" class="logo-img">
+        <div class="brand-text"><span class="brand-name">Markie Cadag</span><span class="brand-tagline">Secure Checkout</span></div>
+      </a>
+      <div class="navbar-actions"><a href="/cart">Back to Cart</a></div>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <section class="checkout-form">
+      <h2>Client and delivery details</h2>
+      <form id="checkout-form">
+        <div class="form-section">
+          <h3>Customer Support Ready</h3>
+          <div class="form-row">
+            <input type="text" name="first_name" placeholder="First name" required>
+            <input type="text" name="last_name" placeholder="Last name" required>
+          </div>
+          <input type="email" name="email" placeholder="Email address" required>
+          <input type="tel" name="phone" placeholder="Mobile number" required>
+        </div>
+        <div class="form-section">
+          <h3>Shipping Address</h3>
+          <input type="text" name="street" placeholder="Street address" required>
+          <input type="text" name="city" placeholder="City or municipality" required>
+          <div class="form-row">
+            <input type="text" name="province" placeholder="Province" required>
+            <input type="text" name="zip" placeholder="ZIP code" required>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Courier Integration</h3>
+          <label class="delivery-option"><input type="radio" name="shipping" value="150" checked> Standard courier (3-7 days) | PHP 150</label>
+          <label class="delivery-option"><input type="radio" name="shipping" value="350"> Express courier (1-2 days) | PHP 350</label>
+        </div>
+        <div class="form-section">
+          <h3>Payment Gateway</h3>
+          <label class="delivery-option"><input type="radio" name="payment" value="GCash" checked> GCash</label>
+          <label class="delivery-option"><input type="radio" name="payment" value="Maya"> Maya</label>
+          <label class="delivery-option"><input type="radio" name="payment" value="Card"> Credit or Debit Card</label>
+          <label class="delivery-option"><input type="radio" name="payment" value="Bank Transfer"> Bank Transfer</label>
+          <label class="delivery-option"><input type="radio" name="payment" value="COD"> Cash on Delivery</label>
+        </div>
+        <div class="form-section">
+          <h3>Order Notes</h3>
+          <textarea name="notes" rows="4" placeholder="Include courier instructions, alteration request, or support notes"></textarea>
+        </div>
+        <p class="policy-copy">By placing this order you agree to the <a href="/terms">Terms & Conditions</a> and <a href="/privacy">Privacy Policy</a>. Alteration fees for size adjustments are shouldered by the client.</p>
+        <button type="submit" class="btn btn-gold w-full">Place Order</button>
+        <p id="checkout-message" class="support-reply"></p>
+      </form>
+    </section>
+
+    <aside class="order-summary-panel">
+      <h3>Order Summary</h3>
+      <div id="summary-items"></div>
+      <div class="summary-total"><span class="label">Subtotal</span><span id="summary-subtotal"></span></div>
+      <div class="summary-total"><span class="label">VIP Discount</span><span id="summary-discount"></span></div>
+      <div class="summary-total"><span class="label">Shipping</span><span id="summary-shipping"></span></div>
+      <div class="summary-total"><span class="label">Total</span><span class="amount" id="summary-total"></span></div>
+    </aside>
+  </main>
+
+  <script src="/js/app.js"></script>
+  <script>
+    const form = document.getElementById('checkout-form');
+    const summaryItems = document.getElementById('summary-items');
+    const summarySubtotal = document.getElementById('summary-subtotal');
+    const summaryDiscount = document.getElementById('summary-discount');
+    const summaryShipping = document.getElementById('summary-shipping');
+    const summaryTotal = document.getElementById('summary-total');
+    const message = document.getElementById('checkout-message');
+
+    function currentShipping() {
+      return Number(form.querySelector('input[name="shipping"]:checked').value);
+    }
+
+    function renderSummary() {
+      const summary = getCartSummary();
+      if (!summary.cart.length) {
+        summaryItems.innerHTML = '<p>No items in cart.</p>';
+      } else {
+        summaryItems.innerHTML = summary.cart.map((item) => `
+          <div class="summary-item">
+            <span class="item-name">${item.name} x ${item.qty} (${item.size})</span>
+            <span class="item-price">${peso(item.price * item.qty)}</span>
+          </div>
+        `).join('');
+      }
+      summarySubtotal.textContent = peso(summary.subtotal);
+      summaryDiscount.textContent = `-${peso(summary.vipDiscount)}`;
+      summaryShipping.textContent = peso(currentShipping());
+      summaryTotal.textContent = peso(summary.discountedSubtotal + currentShipping());
+    }
+
+    form.querySelectorAll('input[name="shipping"]').forEach((input) => {
+      input.addEventListener('change', renderSummary);
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const summary = getCartSummary();
+      if (!summary.cart.length) {
+        message.textContent = 'Your cart is empty.';
+        return;
+      }
+      const order = Object.fromEntries(new FormData(form).entries());
+      const orders = readJson('mc_orders', []);
+      orders.push({
+        ...order,
+        id: `ORD-${Date.now()}`,
+        items: summary.cart,
+        subtotal: summary.subtotal,
+        vipDiscount: summary.vipDiscount,
+        shippingFee: currentShipping(),
+        total: summary.discountedSubtotal + currentShipping(),
+      });
+      writeJson('mc_orders', orders);
+      localStorage.removeItem('mc_cart');
+      updateCartCount();
+      form.reset();
+      message.textContent = `Order captured. Reference ${orders[orders.length - 1].id}. Payment method: ${order.payment}.`;
+      renderSummary();
+    });
+
+    renderSummary();
+  </script>
+</body>
+</html>

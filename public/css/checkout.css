@@ -1,0 +1,33 @@
+/* ─── Checkout Page ─────────────────────────────────────── */
+.checkout-page {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.checkout-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.checkout-total {
+  text-align: right;
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+}
+
+#checkout-message {
+  margin-top: 1rem;
+  color: #555;
+  font-size: 0.9rem;
+}

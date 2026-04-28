@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Couture</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="announcement-bar">Face-to-face couture consultation booking is enabled on this page</div>
+  <header class="navbar">
+    <div class="navbar-top">
+      <a href="/" class="navbar-brand">
+        <img src="/images/mc.jpg" alt="Markie Cadag logo" class="logo-img">
+        <div class="brand-text"><span class="brand-name">Markie Cadag</span><span class="brand-tagline">Custom Couture</span></div>
+      </a>
+      <div class="navbar-actions"><a href="/about">Company Profile</a></div>
+    </div>
+    <nav class="navbar-nav">
+      <a href="/">Home</a>
+      <a href="/custom" class="active">Custom Couture</a>
+      <a href="/rtw">RTW</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <section class="hero" style="min-height:520px;height:70vh;">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <span class="hero-label">Consultation First</span>
+      <h1>Couture services designed around a face-to-face appointment.</h1>
+      <p>Clients can request fittings for weddings, pageants, family milestones, and formal occasions. Production starts after in-person consultation and design approval.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Appointment Booking</span>
+        <h2>Request a consultation</h2>
+        <div class="divider"></div>
+      </div>
+      <form class="booking-form" data-appointment-form>
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Client name" required>
+          <input type="tel" name="phone" placeholder="Mobile number" required>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="Email address" required>
+          <input type="date" name="preferred_date" required>
+        </div>
+        <div class="form-row">
+          <input type="text" name="event_type" placeholder="Event type: wedding, pageant, prom" required>
+          <select name="preferred_time" required>
+            <option value="">Preferred time slot</option>
+            <option>10:00 AM</option>
+            <option>1:00 PM</option>
+            <option>3:00 PM</option>
+          </select>
+        </div>
+        <textarea name="notes" rows="5" placeholder="Describe the outfit, deadline, entourage count, or measurements you want to discuss"></textarea>
+        <button type="submit" class="btn btn-gold">Save Consultation Request</button>
+        <p class="support-reply" data-appointment-message></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card"><h3>Step 1: Consultation</h3><p>Discuss silhouette, event, lead time, budget range, and textile direction.</p></div>
+        <div class="service-card"><h3>Step 2: Sketch and Fitting</h3><p>Design review and measurement session with fitting adjustments as needed.</p></div>
+        <div class="service-card"><h3>Step 3: Release</h3><p>Finished couture piece is released or arranged for delivery after final approval.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
