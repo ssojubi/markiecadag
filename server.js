@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3309;
 const viewsDir = path.join(__dirname, 'views');
 
 app.use(cors());

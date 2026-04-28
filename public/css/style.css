@@ -204,8 +204,8 @@ img { width: 100%; display: block; object-fit: cover; }
 /* ── HERO ── */
 .hero {
   position: relative;
-  height: 92vh;
-  min-height: 580px;
+  height: 78vh;
+  min-height: 500px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -227,7 +227,7 @@ img { width: 100%; display: block; object-fit: cover; }
   position: relative;
   z-index: 2;
   max-width: 780px;
-  padding: 0 5%;
+  padding: 3rem 5%;
 }
 
 .hero-label {
@@ -241,7 +241,7 @@ img { width: 100%; display: block; object-fit: cover; }
 
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2.7rem, 5.8vw, 4.8rem);
   font-weight: 300;
   color: var(--white);
   line-height: 1.1;
@@ -1390,7 +1390,7 @@ footer {
 
 @media (max-width: 768px) {
   .navbar-nav { justify-content: flex-start; }
-  .hero { height: 80vh; }
+  .hero { height: 72vh; min-height: 460px; }
   .product-detail { grid-template-columns: 1fr; }
   .split-section { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; }

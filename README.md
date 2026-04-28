@@ -66,7 +66,7 @@ npm start
 4. Open the website:
 
 ```text
-http://localhost:3307
+http://localhost:3309
 ```
 
 ## Key Routes
