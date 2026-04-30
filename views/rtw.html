@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RTW Collection</title>
+  <link rel="icon" type="image/x-icon" href="/public/images/mc_logo.jpg">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -74,6 +75,48 @@
     </div>
   </section>
 
+  <div class="product-modal" data-rtw-modal hidden>
+    <div class="product-modal-backdrop" data-modal-close></div>
+    <section class="product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="rtw-modal-title">
+      <button type="button" class="product-modal-close" data-modal-close aria-label="Close product details">&times;</button>
+      <div class="product-modal-media">
+        <img src="" alt="" data-modal-image>
+        <button type="button" class="product-modal-arrow product-modal-arrow-left" data-modal-prev aria-label="Previous product photo">&lsaquo;</button>
+        <button type="button" class="product-modal-arrow product-modal-arrow-right" data-modal-next aria-label="Next product photo">&rsaquo;</button>
+      </div>
+      <div class="product-modal-info">
+        <span class="product-modal-category" data-modal-category>RTW</span>
+        <h2 id="rtw-modal-title" data-modal-title></h2>
+        <p class="product-modal-price" data-modal-price></p>
+        <p class="product-modal-desc" data-modal-desc></p>
+
+        <div class="product-option">
+          <span class="product-option-label">Colorway</span>
+          <span data-modal-color></span>
+        </div>
+
+        <div class="product-option">
+          <label class="product-option-label" for="rtw-modal-size">Size</label>
+          <select id="rtw-modal-size" data-modal-size></select>
+        </div>
+
+        <div class="product-option">
+          <span class="product-option-label">Current Stock</span>
+          <span data-modal-stock></span>
+        </div>
+
+        <div class="product-modal-actions">
+          <div class="quantity-controls product-modal-qty">
+            <button type="button" data-modal-minus aria-label="Decrease quantity">-</button>
+            <span data-modal-qty>1</span>
+            <button type="button" data-modal-plus aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn-dark" type="button" data-modal-add>Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <footer>
     <div class="footer-bottom">
       <span>© 2026 Markie Cadag Fashion. All rights reserved.</span>
@@ -91,12 +134,15 @@
     }
 
     function buildProductModel(collection) {
+      const stockBySize = { S: 10, M: 10, L: 10 };
       return {
         ...collection,
         category: 'RTW',
         gender: 'Ready-to-Wear',
-        size: 'Standard',
-        stock: 10,
+        sizes: Object.keys(stockBySize),
+        stockBySize,
+        colorway: 'As shown',
+        stock: Object.values(stockBySize).reduce((sum, stock) => sum + stock, 0),
         price: DEFAULT_RTW_PRICE,
         sku: `RTW-${collection.slug}`,
         description: buildDescription(collection.name),
@@ -117,6 +163,11 @@
       }
 
       const products = collections.map(buildProductModel);
+      let activeModalProductIndex = null;
+      let modalQty = 1;
+      let modalSize = 'M';
+      let modalImage = null;
+      let modalImageIndex = 0;
 
       grid.innerHTML = products.map((product, index) => `
         <article class="product-card rtw-gallery-card" data-card-index="${index}">
@@ -135,12 +186,7 @@
             <button type="button" class="rtw-card-title" data-card-trigger="${index}">${product.name}</button>
             <p class="rtw-card-description">${product.description}</p>
             <div class="rtw-card-actions">
-              <div class="quantity-controls" data-qty-controls="${index}">
-                <button type="button" data-qty-minus="${index}" aria-label="Decrease quantity">-</button>
-                <span data-qty-value="${index}">1</span>
-                <button type="button" data-qty-plus="${index}" aria-label="Increase quantity">+</button>
-              </div>
-              <button class="btn btn-dark" type="button" data-add-cart="${index}">Add to Cart</button>
+              <span class="stock-note">30 pieces available</span>
             </div>
             <div class="product-card-thumbs">
               ${product.images.map((image, thumbIndex) => `
@@ -160,27 +206,97 @@
         </article>
       `).join('');
 
-      const quantities = new Map(products.map((product) => [product.sku, 1]));
+      const modal = document.querySelector('[data-rtw-modal]');
+      const modalImageEl = modal.querySelector('[data-modal-image]');
+      const modalPrevButton = modal.querySelector('[data-modal-prev]');
+      const modalNextButton = modal.querySelector('[data-modal-next]');
+      const modalTitleEl = modal.querySelector('[data-modal-title]');
+      const modalCategoryEl = modal.querySelector('[data-modal-category]');
+      const modalPriceEl = modal.querySelector('[data-modal-price]');
+      const modalDescEl = modal.querySelector('[data-modal-desc]');
+      const modalColorEl = modal.querySelector('[data-modal-color]');
+      const modalSizeEl = modal.querySelector('[data-modal-size]');
+      const modalStockEl = modal.querySelector('[data-modal-stock]');
+      const modalQtyEl = modal.querySelector('[data-modal-qty]');
+      const modalAddButton = modal.querySelector('[data-modal-add]');
 
-      function syncQty(productIndex) {
+      function getSelectedStock() {
+        const product = products[activeModalProductIndex];
+        if (!product) return 0;
+        const baseStock = product.stockBySize?.[modalSize] || 0;
+        const reserved = getCart()
+          .filter((item) =>
+            item.sku === product.sku &&
+            item.size === modalSize &&
+            (item.color || '') === (product.colorway || '')
+          )
+          .reduce((sum, item) => sum + item.qty, 0);
+        return Math.max(0, baseStock - reserved);
+      }
+
+      function syncModalStock() {
+        const stock = getSelectedStock();
+        modalQty = stock === 0 ? 0 : Math.min(Math.max(1, modalQty), stock);
+        modalQtyEl.textContent = String(modalQty);
+        modalStockEl.textContent = `${stock} pieces in ${modalSize}`;
+        modalAddButton.disabled = stock === 0;
+        modalAddButton.textContent = stock === 0 ? 'Out of Stock' : 'Add to Cart';
+      }
+
+      function syncModalArrows() {
+        const product = products[activeModalProductIndex];
+        const imageCount = product?.images?.length || 0;
+        modalPrevButton.hidden = modalImageIndex <= 0;
+        modalNextButton.hidden = modalImageIndex >= imageCount - 1;
+      }
+
+      function setModalImage(index) {
+        const product = products[activeModalProductIndex];
+        if (!product) return;
+        modalImageIndex = Math.min(Math.max(index, 0), product.images.length - 1);
+        const image = product.images[modalImageIndex];
+        modalImage = image;
+        modalImageEl.src = image;
+        modalImageEl.alt = `${product.name} photo ${modalImageIndex + 1}`;
+        syncModalArrows();
+      }
+
+      function openProductModal(productIndex, initialImage) {
         const product = products[productIndex];
-        const valueEl = grid.querySelector(`[data-qty-value="${productIndex}"]`);
-        if (valueEl) {
-          valueEl.textContent = String(quantities.get(product.sku) || 1);
-        }
+        if (!product) return;
+
+        activeModalProductIndex = productIndex;
+        modalQty = 1;
+        modalSize = product.sizes.includes('M') ? 'M' : product.sizes[0];
+        modalImage = initialImage || product.coverImage;
+        modalImageIndex = Math.max(0, product.images.indexOf(modalImage));
+
+        modalTitleEl.textContent = product.name;
+        modalCategoryEl.textContent = product.category;
+        modalPriceEl.textContent = peso(product.price);
+        modalDescEl.textContent = product.description;
+        modalColorEl.textContent = product.colorway;
+        modalSizeEl.innerHTML = product.sizes
+          .map((size) => `<option value="${size}"${size === modalSize ? ' selected' : ''}>${size}</option>`)
+          .join('');
+
+        setModalImage(modalImageIndex);
+        syncModalStock();
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
       }
 
-      function setActiveCard(cardIndex) {
-        grid.querySelectorAll('.rtw-gallery-card').forEach((card) => {
-          card.classList.toggle('active', card.dataset.cardIndex === String(cardIndex));
-        });
+      function closeProductModal() {
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+        activeModalProductIndex = null;
       }
 
-      setActiveCard(0);
-
-      grid.querySelectorAll('[data-card-trigger]').forEach((button) => {
-        button.addEventListener('click', () => {
-          setActiveCard(button.dataset.cardTrigger);
+      grid.querySelectorAll('.rtw-gallery-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const productIndex = Number(card.dataset.cardIndex);
+          const mainImage = grid.querySelector(`[data-main-image="${productIndex}"]`);
+          openProductModal(productIndex, mainImage ? mainImage.getAttribute('src') : undefined);
         });
       });
 
@@ -190,7 +306,6 @@
           const mainImage = grid.querySelector(`[data-main-image="${cardIndex}"]`);
           if (!mainImage) return;
 
-          setActiveCard(cardIndex);
           mainImage.src = button.dataset.image;
           mainImage.alt = button.dataset.alt;
 
@@ -201,50 +316,61 @@
         });
       });
 
-      grid.querySelectorAll('[data-qty-minus]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const product = products[Number(button.dataset.qtyMinus)];
-          const next = Math.max(1, (quantities.get(product.sku) || 1) - 1);
-          quantities.set(product.sku, next);
-          syncQty(Number(button.dataset.qtyMinus));
-        });
+      modalPrevButton.addEventListener('click', () => {
+        setModalImage(modalImageIndex - 1);
       });
 
-      grid.querySelectorAll('[data-qty-plus]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const product = products[Number(button.dataset.qtyPlus)];
-          const next = Math.min(product.stock, (quantities.get(product.sku) || 1) + 1);
-          quantities.set(product.sku, next);
-          syncQty(Number(button.dataset.qtyPlus));
-        });
+      modalNextButton.addEventListener('click', () => {
+        setModalImage(modalImageIndex + 1);
       });
 
-      grid.querySelectorAll('[data-add-cart]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const productIndex = Number(button.dataset.addCart);
-          const product = products[productIndex];
-          const mainImage = grid.querySelector(`[data-main-image="${productIndex}"]`);
-          const qty = quantities.get(product.sku) || 1;
+      modalSizeEl.addEventListener('change', () => {
+        modalSize = modalSizeEl.value;
+        modalQty = 1;
+        syncModalStock();
+      });
 
-          addStoreItem({
-            sku: product.sku,
-            name: product.name,
-            category: product.category,
-            gender: product.gender,
-            size: product.size,
-            stock: product.stock,
-            price: product.price,
-            qty,
-            image: mainImage ? mainImage.getAttribute('src') : product.coverImage,
-          });
+      modal.querySelector('[data-modal-minus]').addEventListener('click', () => {
+        modalQty = Math.max(1, modalQty - 1);
+        syncModalStock();
+      });
 
-          quantities.set(product.sku, 1);
-          syncQty(productIndex);
-          button.textContent = 'Added';
-          window.setTimeout(() => {
-            button.textContent = 'Add to Cart';
-          }, 900);
+      modal.querySelector('[data-modal-plus]').addEventListener('click', () => {
+        modalQty = Math.min(getSelectedStock(), modalQty + 1);
+        syncModalStock();
+      });
+
+      modalAddButton.addEventListener('click', () => {
+        const product = products[activeModalProductIndex];
+        if (!product) return;
+
+        addStoreItem({
+          sku: product.sku,
+          name: product.name,
+          category: product.category,
+          gender: product.gender,
+          size: modalSize,
+          color: product.colorway,
+          stock: getSelectedStock(),
+          price: product.price,
+          qty: modalQty,
+          image: modalImage || product.coverImage,
         });
+
+        modalAddButton.textContent = 'Added';
+        window.setTimeout(() => {
+          syncModalStock();
+        }, 900);
+      });
+
+      modal.querySelectorAll('[data-modal-close]').forEach((button) => {
+        button.addEventListener('click', closeProductModal);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) {
+          closeProductModal();
+        }
       });
     }
 

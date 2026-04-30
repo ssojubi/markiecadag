@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart</title>
+  <link rel="icon" type="image/x-icon" href="/public/images/mc_logo.jpg">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -63,7 +64,7 @@
           <div class="cart-item-info">
             <span class="cat">${item.category}</span>
             <h3>${item.name}</h3>
-            <p>${item.gender} | ${item.size} | Limited release stock ${item.stock}/10</p>
+            <p>${item.gender} | Size ${item.size}${item.color ? ` | ${item.color}` : ''} | ${item.stock} in stock</p>
             <div class="quantity-controls">
               <button type="button" data-minus="${index}">-</button>
               <span>${item.qty}</span>

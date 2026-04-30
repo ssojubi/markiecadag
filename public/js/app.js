@@ -54,7 +54,10 @@ function setVipMember(active) {
 function addStoreItem(item) {
   const cart = getCart();
   const existing = cart.find(
-    (entry) => entry.sku === item.sku && entry.size === item.size
+    (entry) =>
+      entry.sku === item.sku &&
+      entry.size === item.size &&
+      (entry.color || '') === (item.color || '')
   );
 
   if (existing) {
