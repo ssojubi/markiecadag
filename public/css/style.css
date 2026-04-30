@@ -428,6 +428,112 @@ img { width: 100%; display: block; object-fit: cover; }
   margin-top: 0.2rem;
 }
 
+.rtw-gallery-card {
+  cursor: default;
+  border: 1px solid transparent;
+  padding: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rtw-gallery-card.active {
+  border-color: var(--border);
+  box-shadow: 0 10px 30px rgba(28,22,18,0.08);
+}
+
+.rtw-main-image {
+  display: block;
+}
+
+.rtw-card-trigger,
+.rtw-card-title {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.rtw-card-trigger {
+  display: block;
+  width: 100%;
+}
+
+.rtw-card-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--dark);
+  text-align: left;
+}
+
+.rtw-card-description {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-top: 0.45rem;
+}
+
+.rtw-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+
+.quantity-controls button {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  color: var(--dark);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quantity-controls span {
+  min-width: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--dark);
+}
+
+.product-card-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.product-card-thumb {
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0.72;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.product-card-thumb:hover,
+.product-card-thumb.active {
+  opacity: 1;
+  border-color: var(--gold);
+}
+
+.product-card-thumb img {
+  display: block;
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+}
+
 /* ── COLLECTIONS STRIP ── */
 .collections-strip {
   display: grid;
@@ -1405,6 +1511,8 @@ footer {
   .trust-grid { gap: 2rem; }
   .section { padding: 3.5rem 1.5rem; }
   .cart-footer { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .rtw-card-actions { flex-direction: column; align-items: stretch; }
+  .quantity-controls { align-self: flex-start; }
 }
 
 @media (max-width: 480px) {

@@ -1,11 +1,50 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3309;
 const viewsDir = path.join(__dirname, 'views');
+const imagesDir = path.join(__dirname, 'public', 'images');
+const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif']);
+
+function formatCollectionName(name) {
+  return name
+    .toLowerCase()
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function getRtwCatalog() {
+  if (!fs.existsSync(imagesDir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(imagesDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => {
+      const folderPath = path.join(imagesDir, entry.name);
+      const images = fs
+        .readdirSync(folderPath, { withFileTypes: true })
+        .filter((file) => file.isFile() && imageExtensions.has(path.extname(file.name).toLowerCase()))
+        .map((file) => `/images/${encodeURIComponent(entry.name)}/${encodeURIComponent(file.name)}`);
+
+      return {
+        slug: entry.name,
+        name: formatCollectionName(entry.name),
+        images,
+        coverImage: images[0] || null,
+        photoCount: images.length,
+      };
+    })
+    .filter((item) => item.images.length > 0)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
 
 app.use(cors());
 app.use(express.json());
@@ -14,6 +53,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.get('/api/rtw-catalog', (req, res) => {
+  res.json(getRtwCatalog());
+});
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));

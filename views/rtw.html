@@ -49,16 +49,18 @@
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <span class="section-eyebrow">By Gender</span>
+        <span class="section-eyebrow">Uploaded Collections</span>
         <h2>RTW product showcase</h2>
         <div class="divider"></div>
       </div>
-      <div class="gender-strip">
-        <div class="compliance-badge">Women</div>
-        <div class="compliance-badge">Men</div>
-        <div class="compliance-badge">Unisex Capsule</div>
+      <div class="product-grid" id="rtw-grid">
+        <article class="product-card">
+          <div class="product-card-info">
+            <span class="category">Loading</span>
+            <h3>Reading uploaded RTW folders...</h3>
+          </div>
+        </article>
       </div>
-      <div class="product-grid" id="rtw-grid"></div>
     </div>
   </section>
 
@@ -81,47 +83,194 @@
 
   <script src="/js/app.js"></script>
   <script>
-    const products = [
-      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Small', stock: 10, sku: 'RTW-CRIMSON-S' },
-      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Medium', stock: 10, sku: 'RTW-CRIMSON-M' },
-      { name: 'Crimson Elegance Gown', category: 'RTW', gender: 'Women', price: 4500, image: '/images/dressred.jpg', size: 'Large', stock: 10, sku: 'RTW-CRIMSON-L' },
-      { name: 'Suzaine Cocktail Dress', category: 'RTW', gender: 'Women', price: 3800, image: '/images/dresssuzaine.jpg', size: 'Small', stock: 10, sku: 'RTW-SUZ-S' },
-      { name: 'Classic Modern Barong Set', category: 'RTW', gender: 'Men', price: 3200, image: '/images/barong2.jpg', size: 'Medium', stock: 10, sku: 'RTW-BARONG-M' },
-      { name: 'Atelier Lounge Terno', category: 'RTW', gender: 'Unisex Capsule', price: 2400, image: '/images/filipiniana1.jpg', size: 'Large', stock: 10, sku: 'RTW-TERNO-L' }
-    ];
-
     const grid = document.getElementById('rtw-grid');
-    const render = () => {
-      const vip = isVipMember();
-      grid.innerHTML = products.map((product) => {
-        const vipPrice = vip ? Math.round(product.price * 0.25) : product.price;
-        return `
+    const DEFAULT_RTW_PRICE = 3500;
+
+    function buildDescription(name) {
+      return `${name} is part of the latest ready-to-wear release, styled for occasions, portraits, and polished day-to-evening dressing.`;
+    }
+
+    function buildProductModel(collection) {
+      return {
+        ...collection,
+        category: 'RTW',
+        gender: 'Ready-to-Wear',
+        size: 'Standard',
+        stock: 10,
+        price: DEFAULT_RTW_PRICE,
+        sku: `RTW-${collection.slug}`,
+        description: buildDescription(collection.name),
+      };
+    }
+
+    function renderCollections(collections) {
+      if (!collections.length) {
+        grid.innerHTML = `
           <article class="product-card">
-            <div class="product-card-image">
-              <img src="${product.image}" alt="${product.name}">
-              <div class="product-card-badge">${product.gender}</div>
-            </div>
             <div class="product-card-info">
-              <span class="category">${product.category}</span>
-              <h3>${product.name}</h3>
-              <p class="price">${peso(vipPrice)} ${vip ? '<span class="vip-price-note">VIP applied</span>' : ''}</p>
-              <p class="stock-note">${product.size}: ${product.stock}/10 available</p>
-              <button class="btn btn-dark w-full" type="button" data-sku="${product.sku}">Add to Cart</button>
+              <span class="category">No uploads found</span>
+              <h3>Add RTW folders inside /public/images to show them here.</h3>
             </div>
           </article>
         `;
-      }).join('');
+        return;
+      }
 
-      grid.querySelectorAll('[data-sku]').forEach((button) => {
+      const products = collections.map(buildProductModel);
+
+      grid.innerHTML = products.map((product, index) => `
+        <article class="product-card rtw-gallery-card" data-card-index="${index}">
+          <div class="product-card-image">
+            <button type="button" class="rtw-card-trigger" data-card-trigger="${index}" aria-label="Open ${product.name}">
+              <img
+                src="${product.coverImage}"
+                alt="${product.name}"
+                class="rtw-main-image"
+                data-main-image="${index}"
+              >
+            </button>
+            <div class="product-card-badge">RTW</div>
+          </div>
+          <div class="product-card-info">
+            <button type="button" class="rtw-card-title" data-card-trigger="${index}">${product.name}</button>
+            <p class="rtw-card-description">${product.description}</p>
+            <div class="rtw-card-actions">
+              <div class="quantity-controls" data-qty-controls="${index}">
+                <button type="button" data-qty-minus="${index}" aria-label="Decrease quantity">-</button>
+                <span data-qty-value="${index}">1</span>
+                <button type="button" data-qty-plus="${index}" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="btn btn-dark" type="button" data-add-cart="${index}">Add to Cart</button>
+            </div>
+            <div class="product-card-thumbs">
+              ${product.images.map((image, thumbIndex) => `
+                <button
+                  type="button"
+                  class="product-card-thumb${thumbIndex === 0 ? ' active' : ''}"
+                  data-card-index="${index}"
+                  data-image="${image}"
+                  data-alt="${product.name} photo ${thumbIndex + 1}"
+                  aria-label="Show ${product.name} photo ${thumbIndex + 1}"
+                >
+                  <img src="${image}" alt="${product.name} photo ${thumbIndex + 1}">
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      const quantities = new Map(products.map((product) => [product.sku, 1]));
+
+      function syncQty(productIndex) {
+        const product = products[productIndex];
+        const valueEl = grid.querySelector(`[data-qty-value="${productIndex}"]`);
+        if (valueEl) {
+          valueEl.textContent = String(quantities.get(product.sku) || 1);
+        }
+      }
+
+      function setActiveCard(cardIndex) {
+        grid.querySelectorAll('.rtw-gallery-card').forEach((card) => {
+          card.classList.toggle('active', card.dataset.cardIndex === String(cardIndex));
+        });
+      }
+
+      setActiveCard(0);
+
+      grid.querySelectorAll('[data-card-trigger]').forEach((button) => {
         button.addEventListener('click', () => {
-          const product = products.find((item) => item.sku === button.dataset.sku);
-          addStoreItem({ ...product, qty: 1 });
+          setActiveCard(button.dataset.cardTrigger);
         });
       });
-    };
 
-    window.addEventListener('mc:vip-change', render);
-    render();
+      grid.querySelectorAll('.product-card-thumb').forEach((button) => {
+        button.addEventListener('click', () => {
+          const cardIndex = button.dataset.cardIndex;
+          const mainImage = grid.querySelector(`[data-main-image="${cardIndex}"]`);
+          if (!mainImage) return;
+
+          setActiveCard(cardIndex);
+          mainImage.src = button.dataset.image;
+          mainImage.alt = button.dataset.alt;
+
+          grid
+            .querySelectorAll(`.product-card-thumb[data-card-index="${cardIndex}"]`)
+            .forEach((thumb) => thumb.classList.remove('active'));
+          button.classList.add('active');
+        });
+      });
+
+      grid.querySelectorAll('[data-qty-minus]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const product = products[Number(button.dataset.qtyMinus)];
+          const next = Math.max(1, (quantities.get(product.sku) || 1) - 1);
+          quantities.set(product.sku, next);
+          syncQty(Number(button.dataset.qtyMinus));
+        });
+      });
+
+      grid.querySelectorAll('[data-qty-plus]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const product = products[Number(button.dataset.qtyPlus)];
+          const next = Math.min(product.stock, (quantities.get(product.sku) || 1) + 1);
+          quantities.set(product.sku, next);
+          syncQty(Number(button.dataset.qtyPlus));
+        });
+      });
+
+      grid.querySelectorAll('[data-add-cart]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const productIndex = Number(button.dataset.addCart);
+          const product = products[productIndex];
+          const mainImage = grid.querySelector(`[data-main-image="${productIndex}"]`);
+          const qty = quantities.get(product.sku) || 1;
+
+          addStoreItem({
+            sku: product.sku,
+            name: product.name,
+            category: product.category,
+            gender: product.gender,
+            size: product.size,
+            stock: product.stock,
+            price: product.price,
+            qty,
+            image: mainImage ? mainImage.getAttribute('src') : product.coverImage,
+          });
+
+          quantities.set(product.sku, 1);
+          syncQty(productIndex);
+          button.textContent = 'Added';
+          window.setTimeout(() => {
+            button.textContent = 'Add to Cart';
+          }, 900);
+        });
+      });
+    }
+
+    async function loadCollections() {
+      try {
+        const response = await fetch('/api/rtw-catalog');
+        if (!response.ok) {
+          throw new Error(`RTW catalog request failed with status ${response.status}`);
+        }
+
+        const collections = await response.json();
+        renderCollections(collections);
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = `
+          <article class="product-card">
+            <div class="product-card-info">
+              <span class="category">Catalog error</span>
+              <h3>Unable to load the catalogue right now.</h3>
+            </div>
+          </article>
+        `;
+      }
+    }
+
+    loadCollections();
   </script>
 </body>
 </html>
