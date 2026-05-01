@@ -68,7 +68,6 @@
       <h3>Order Summary</h3>
       <div id="summary-items"></div>
       <div class="summary-total"><span class="label">Subtotal</span><span id="summary-subtotal"></span></div>
-      <div class="summary-total"><span class="label">VIP Discount</span><span id="summary-discount"></span></div>
       <div class="summary-total"><span class="label">Shipping</span><span id="summary-shipping"></span></div>
       <div class="summary-total"><span class="label">Total</span><span class="amount" id="summary-total"></span></div>
     </aside>
@@ -79,7 +78,6 @@
     const form = document.getElementById('checkout-form');
     const summaryItems = document.getElementById('summary-items');
     const summarySubtotal = document.getElementById('summary-subtotal');
-    const summaryDiscount = document.getElementById('summary-discount');
     const summaryShipping = document.getElementById('summary-shipping');
     const summaryTotal = document.getElementById('summary-total');
     const message = document.getElementById('checkout-message');
@@ -101,9 +99,8 @@
         `).join('');
       }
       summarySubtotal.textContent = peso(summary.subtotal);
-      summaryDiscount.textContent = `-${peso(summary.vipDiscount)}`;
       summaryShipping.textContent = peso(currentShipping());
-      summaryTotal.textContent = peso(summary.discountedSubtotal + currentShipping());
+      summaryTotal.textContent = peso(summary.total + currentShipping());
     }
 
     form.querySelectorAll('input[name="shipping"]').forEach((input) => {
@@ -124,9 +121,8 @@
         id: `ORD-${Date.now()}`,
         items: summary.cart,
         subtotal: summary.subtotal,
-        vipDiscount: summary.vipDiscount,
         shippingFee: currentShipping(),
-        total: summary.discountedSubtotal + currentShipping(),
+        total: summary.total + currentShipping(),
       });
       writeJson('mc_orders', orders);
       localStorage.removeItem('mc_cart');

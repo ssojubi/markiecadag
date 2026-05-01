@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In — Markie Cadag Fashion</title>
+  <title>Sign In - Markie Cadag Fashion</title>
   <link rel="icon" type="image/x-icon" href="/public/images/mc_logo.jpg">
   <link rel="stylesheet" href="public/css/style.css">
 </head>
-<body>
+<body class="auth-body">
 
 <header class="navbar">
   <div class="navbar-top">
@@ -15,7 +15,7 @@
       <img src="public/images/mc.jpg" alt="Markie Cadag Logo" class="logo-img">
       <div class="brand-text">
         <span class="brand-name">Markie Cadag</span>
-        <span class="brand-tagline">Fashion House · Est. 2010</span>
+        <span class="brand-tagline">Fashion House &middot; Est. 2010</span>
       </div>
     </a>
     <div class="navbar-actions">
@@ -24,37 +24,32 @@
   </div>
 </header>
 
-<div class="auth-page">
-  <h2>Welcome Back</h2>
-  <p class="subtitle">Sign in to your Markie Cadag account</p>
+<main class="auth-layout auth-layout-login">
+  <section class="auth-panel">
+    <div class="auth-page">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to your Markie Cadag account</p>
 
-  <form class="auth-form" onsubmit="handleLogin(event)">
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      <form class="auth-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-dark w-full">Sign In</button>
+        <p class="helper"><a href="#">Forgot your password?</a></p>
+        <p class="helper">New here? <a href="register.html">Create an account</a></p>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="••••••••" required>
-    </div>
-    <button type="submit" class="btn btn-dark w-full" style="padding:0.9rem;">Sign In</button>
-    <p class="helper"><a href="#">Forgot your password?</a></p>
-    <p class="helper">New here? <a href="register.html">Create an account</a></p>
-    <div style="margin-top:0.5rem;padding:1rem;background:var(--cream);border-left:2px solid var(--gold);font-size:0.78rem;color:var(--muted);line-height:1.7;text-align:left;">
-      <strong style="color:var(--mid);">VIP Members</strong> enjoy 75% discount on all RTW items. <a href="register.html" style="color:var(--gold);">Join now →</a>
-    </div>
-  </form>
-</div>
+  </section>
 
-<footer>
-  <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding:1.5rem 2.5rem;max-width:1200px;margin:0 auto;">
-    <span>© 2026 Markie Cadag Fashion. All rights reserved.</span>
-    <div>
-      <a href="/privacy" style="color:rgba(255,255,255,0.35);margin-left:1.5rem;">Privacy Policy</a>
-      <a href="/terms" style="color:rgba(255,255,255,0.35);margin-left:1.5rem;">Terms & Conditions</a>
-    </div>
-  </div>
-</footer>
+  <section class="auth-image" aria-label="Markie Cadag couture">
+    <img src="public/images/dresssuzaine.jpg" alt="Markie Cadag dress model">
+  </section>
+</main>
 
 <script>
   async function handleLogin(e) {

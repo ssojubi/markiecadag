@@ -16,7 +16,6 @@ The website currently includes:
 - Proof-of-selling pages through cart and checkout flow
 - Featured client sections
 - SEC, BIR, and Mayor's Permit compliance visibility
-- VIP membership toggle with 75% RTW discount behavior
 - Face-to-face consultation booking form for couture services
 - Courier and payment method selection in checkout
 - Terms and Conditions
@@ -90,7 +89,6 @@ http://localhost:3309
 
 - The visible storefront flow currently uses `localStorage` for:
   - cart items
-  - VIP membership state
   - appointment requests
   - checkout order capture
   - support chat state
@@ -100,7 +98,6 @@ http://localhost:3309
 ## Next Recommended Improvements
 
 - Connect RTW cart and checkout fully to MySQL-backed product and order records
-- Persist VIP membership in the customer database
 - Persist consultation bookings in the database
 - Connect support chat to a real messaging or CRM service
 - Replace text-based compliance badges with official uploaded permit/logo assets

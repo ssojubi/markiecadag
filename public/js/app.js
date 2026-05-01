@@ -1,5 +1,4 @@
 const CART_KEY = 'mc_cart';
-const VIP_KEY = 'mc_vip_member';
 const APPOINTMENTS_KEY = 'mc_appointments';
 const ORDERS_KEY = 'mc_orders';
 const CHAT_KEY = 'mc_chat_open';
@@ -40,17 +39,6 @@ function updateCartCount() {
   });
 }
 
-function isVipMember() {
-  return localStorage.getItem(VIP_KEY) === 'true';
-}
-
-function setVipMember(active) {
-  localStorage.setItem(VIP_KEY, active ? 'true' : 'false');
-  document.querySelectorAll('[data-vip-status]').forEach((el) => {
-    el.textContent = active ? 'VIP active: 75% RTW discount applied' : 'Join VIP for 75% off RTW';
-  });
-}
-
 function addStoreItem(item) {
   const cart = getCart();
   const existing = cart.find(
@@ -84,32 +72,13 @@ function updateCartQty(index, qty) {
 }
 
 function getCartSummary() {
-  const vip = isVipMember();
   const cart = getCart();
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const vipDiscount = vip
-    ? cart
-        .filter((item) => item.category === 'RTW')
-        .reduce((sum, item) => sum + item.price * item.qty * 0.75, 0)
-    : 0;
   return {
     cart,
-    vip,
     subtotal,
-    vipDiscount,
-    discountedSubtotal: Math.max(0, subtotal - vipDiscount),
+    total: subtotal,
   };
-}
-
-function initVipToggle() {
-  document.querySelectorAll('[data-action="vip-toggle"]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const next = !isVipMember();
-      setVipMember(next);
-      button.textContent = next ? 'VIP Enabled' : 'Activate VIP';
-      window.dispatchEvent(new Event('mc:vip-change'));
-    });
-  });
 }
 
 function initAppointmentForm() {
@@ -178,18 +147,9 @@ function initSupportForm() {
   });
 }
 
-function initRegistrationVip() {
-  const checkbox = document.querySelector('[name="vip_member"]');
-  if (!checkbox) return;
-  checkbox.checked = isVipMember();
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
-  setVipMember(isVipMember());
-  initVipToggle();
   initAppointmentForm();
   initChatWidget();
   initSupportForm();
-  initRegistrationVip();
 });
