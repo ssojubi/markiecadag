@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTW Collection</title>
+  <link rel="icon" type="image/x-icon" href="/images/brainer_logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="announcement-bar">RTW stock is limited to 30 pieces per design: 10 small, 10 medium, 10 large</div>
+  <header class="navbar">
+    <div class="navbar-top">
+      <a href="/" class="navbar-brand">
+        
+        <img src="/images/brainer_logo.png" alt="Brainer Atelier logo" class="logo-img">
+      </a>
+      <div class="navbar-actions">
+        <a href="/register">Create Account</a>
+        <a href="/cart" class="cart-icon" title="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 01-8 0"></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+    <nav class="navbar-nav">
+      <a href="/">Home</a>
+      <a href="/custom">Custom Couture</a>
+      <a href="/rtw" class="active">RTW</a>
+      <a href="/filipiniana">Barong & Filipiniana</a>
+      <a href="/kidsandteens">Kids & Teen</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <section class="shop-header">
+    <span class="section-eyebrow">Ready to Wear</span>
+    <h1>Women and menswear drops with limited release sizing</h1>
+    <div class="hero-cta" style="justify-content:center;margin-top:1.5rem;">
+      <a href="/register" class="btn btn-silver">Create Account</a>
+      <a href="/checkout" class="btn btn-outline">Go to Checkout</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Uploaded Collections</span>
+        <h2>RTW product showcase</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="product-grid" id="rtw-grid">
+        <article class="product-card">
+          <div class="product-card-info">
+            <span class="category">Loading</span>
+            <h3>Reading uploaded RTW folders...</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="services-grid">
+        <div class="service-card"><h3>Alteration Policy</h3><p>Size adjustments after purchase are available. Alteration fees are quoted separately and shouldered by the client.</p></div>
+        <div class="service-card"><h3>Payment Gateway Options</h3><p>Checkout supports GCash, Maya, card, bank transfer, and COD selection in a single order flow.</p></div>
+        <div class="service-card"><h3>Courier Delivery</h3><p>Standard and express shipping options are available at checkout for nationwide dispatch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="product-modal" data-rtw-modal hidden>
+    <div class="product-modal-backdrop" data-modal-close></div>
+    <section class="product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="rtw-modal-title">
+      <button type="button" class="product-modal-close" data-modal-close aria-label="Close product details">&times;</button>
+      <div class="product-modal-media">
+        <img src="" alt="" data-modal-image>
+        <button type="button" class="product-modal-arrow product-modal-arrow-left" data-modal-prev aria-label="Previous product photo">&lsaquo;</button>
+        <button type="button" class="product-modal-arrow product-modal-arrow-right" data-modal-next aria-label="Next product photo">&rsaquo;</button>
+      </div>
+      <div class="product-modal-info">
+        <span class="product-modal-category" data-modal-category>RTW</span>
+        <h2 id="rtw-modal-title" data-modal-title></h2>
+        <p class="product-modal-price" data-modal-price></p>
+        <p class="product-modal-desc" data-modal-desc></p>
+
+        <div class="product-option">
+          <span class="product-option-label">Colorway</span>
+          <span data-modal-color></span>
+        </div>
+
+        <div class="product-option">
+          <label class="product-option-label" for="rtw-modal-size">Size</label>
+          <select id="rtw-modal-size" data-modal-size></select>
+        </div>
+
+        <div class="product-option">
+          <span class="product-option-label">Current Stock</span>
+          <span data-modal-stock></span>
+        </div>
+
+        <div class="product-modal-actions">
+          <div class="quantity-controls product-modal-qty">
+            <button type="button" data-modal-minus aria-label="Decrease quantity">-</button>
+            <span data-modal-qty>1</span>
+            <button type="button" data-modal-plus aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn-dark" type="button" data-modal-add>Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/images/brainer_logo_white.png" alt="Brainer Atelier logo" class="logo-img-footer">
+        <p>Bespoke Filipino fashion house focused on couture, RTW, family collections, and compliant online selling.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <a href="/rtw">RTW</a>
+        <a href="/filipiniana">Barong & Filipiniana</a>
+        <a href="/kidsandteens">Kids & Teen</a>
+        <a href="/custom">Custom Couture</a>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <a href="#" onclick="openLegalModal('terms', event)">Terms & Conditions</a>
+        <a href="#" onclick="openLegalModal('privacy', event)">Privacy Policy</a>
+        <a href="#" onclick="openLegalModal('shipping', event)">Shipping Policy</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="/about">About Us</a>
+        <a href="/checkout">Checkout</a>
+        <a href="/cart">Cart</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brainer Atelier. All rights reserved.</span>
+      <div>
+        <a href="#" onclick="openLegalModal('privacy', event)">Privacy Policy</a>
+        <a href="#" onclick="openLegalModal('terms', event)">Terms & Conditions</a>
+        <a href="#" onclick="openLegalModal('shipping', event)">Shipping Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chat-widget">
+    <button class="chat-btn" title="Customer Support">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </button>
+    <div class="chat-panel" hidden>
+      <div class="chat-panel-header">
+        <strong>Support and AI Assistant</strong>
+        <button type="button" data-chat-close>Close</button>
+      </div>
+      <p class="chat-copy">Ask about appointments, courier delivery, or RTW stock. This panel captures support requests.</p>
+      <form data-support-form class="support-form">
+        <input type="text" name="name" placeholder="Your name">
+        <input type="email" name="email" placeholder="Email address">
+        <textarea name="message" rows="4" placeholder="How can we help?"></textarea>
+        <button type="submit" class="btn btn-dark w-full">Send Request</button>
+      </form>
+      <p class="support-reply" data-support-reply></p>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    const grid = document.getElementById('rtw-grid');
+    const DEFAULT_RTW_PRICE = 3500;
+
+    function buildDescription(name) {
+      return `${name} is part of the latest ready-to-wear release, styled for occasions, portraits, and polished day-to-evening dressing.`;
+    }
+
+    function buildProductModel(collection) {
+      const stockBySize = { S: 10, M: 10, L: 10 };
+      return {
+        ...collection,
+        category: 'RTW',
+        gender: 'Ready-to-Wear',
+        sizes: Object.keys(stockBySize),
+        stockBySize,
+        colorway: 'As shown',
+        stock: Object.values(stockBySize).reduce((sum, stock) => sum + stock, 0),
+        price: DEFAULT_RTW_PRICE,
+        sku: `RTW-${collection.slug}`,
+        description: buildDescription(collection.name),
+      };
+    }
+
+    function renderCollections(collections) {
+      if (!collections.length) {
+        grid.innerHTML = `
+          <article class="product-card">
+            <div class="product-card-info">
+              <span class="category">No uploads found</span>
+              <h3>Add RTW folders inside /public/images to show them here.</h3>
+            </div>
+          </article>
+        `;
+        return;
+      }
+
+      const products = collections.map(buildProductModel);
+      let activeModalProductIndex = null;
+      let modalQty = 1;
+      let modalSize = 'M';
+      let modalImage = null;
+      let modalImageIndex = 0;
+
+      grid.innerHTML = products.map((product, index) => `
+        <article class="product-card rtw-gallery-card" data-card-index="${index}">
+          <div class="product-card-image">
+            <button type="button" class="rtw-card-trigger" data-card-trigger="${index}" aria-label="Open ${product.name}">
+              <img
+                src="${product.coverImage}"
+                alt="${product.name}"
+                class="rtw-main-image"
+                data-main-image="${index}"
+              >
+            </button>
+            <div class="product-card-badge">RTW</div>
+          </div>
+          <div class="product-card-info">
+            <button type="button" class="rtw-card-title" data-card-trigger="${index}">${product.name}</button>
+            <p class="rtw-card-description">${product.description}</p>
+            <div class="rtw-card-actions">
+              <span class="stock-note">30 pieces available</span>
+            </div>
+            <div class="product-card-thumbs">
+              ${product.images.map((image, thumbIndex) => `
+                <button
+                  type="button"
+                  class="product-card-thumb${thumbIndex === 0 ? ' active' : ''}"
+                  data-card-index="${index}"
+                  data-image="${image}"
+                  data-alt="${product.name} photo ${thumbIndex + 1}"
+                  aria-label="Show ${product.name} photo ${thumbIndex + 1}"
+                >
+                  <img src="${image}" alt="${product.name} photo ${thumbIndex + 1}">
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      const modal = document.querySelector('[data-rtw-modal]');
+      const modalImageEl = modal.querySelector('[data-modal-image]');
+      const modalPrevButton = modal.querySelector('[data-modal-prev]');
+      const modalNextButton = modal.querySelector('[data-modal-next]');
+      const modalTitleEl = modal.querySelector('[data-modal-title]');
+      const modalCategoryEl = modal.querySelector('[data-modal-category]');
+      const modalPriceEl = modal.querySelector('[data-modal-price]');
+      const modalDescEl = modal.querySelector('[data-modal-desc]');
+      const modalColorEl = modal.querySelector('[data-modal-color]');
+      const modalSizeEl = modal.querySelector('[data-modal-size]');
+      const modalStockEl = modal.querySelector('[data-modal-stock]');
+      const modalQtyEl = modal.querySelector('[data-modal-qty]');
+      const modalAddButton = modal.querySelector('[data-modal-add]');
+
+      function getSelectedStock() {
+        const product = products[activeModalProductIndex];
+        if (!product) return 0;
+        const baseStock = product.stockBySize?.[modalSize] || 0;
+        const reserved = getCart()
+          .filter((item) =>
+            item.sku === product.sku &&
+            item.size === modalSize &&
+            (item.color || '') === (product.colorway || '')
+          )
+          .reduce((sum, item) => sum + item.qty, 0);
+        return Math.max(0, baseStock - reserved);
+      }
+
+      function syncModalStock() {
+        const stock = getSelectedStock();
+        modalQty = stock === 0 ? 0 : Math.min(Math.max(1, modalQty), stock);
+        modalQtyEl.textContent = String(modalQty);
+        modalStockEl.textContent = `${stock} pieces in ${modalSize}`;
+        modalAddButton.disabled = stock === 0;
+        modalAddButton.textContent = stock === 0 ? 'Out of Stock' : 'Add to Cart';
+      }
+
+      function syncModalArrows() {
+        const product = products[activeModalProductIndex];
+        const imageCount = product?.images?.length || 0;
+        modalPrevButton.hidden = modalImageIndex <= 0;
+        modalNextButton.hidden = modalImageIndex >= imageCount - 1;
+      }
+
+      function setModalImage(index) {
+        const product = products[activeModalProductIndex];
+        if (!product) return;
+        modalImageIndex = Math.min(Math.max(index, 0), product.images.length - 1);
+        const image = product.images[modalImageIndex];
+        modalImage = image;
+        modalImageEl.src = image;
+        modalImageEl.alt = `${product.name} photo ${modalImageIndex + 1}`;
+        syncModalArrows();
+      }
+
+      function openProductModal(productIndex, initialImage) {
+        const product = products[productIndex];
+        if (!product) return;
+
+        activeModalProductIndex = productIndex;
+        modalQty = 1;
+        modalSize = product.sizes.includes('M') ? 'M' : product.sizes[0];
+        modalImage = initialImage || product.coverImage;
+        modalImageIndex = Math.max(0, product.images.indexOf(modalImage));
+
+        modalTitleEl.textContent = product.name;
+        modalCategoryEl.textContent = product.category;
+        modalPriceEl.textContent = peso(product.price);
+        modalDescEl.textContent = product.description;
+        modalColorEl.textContent = product.colorway;
+        modalSizeEl.innerHTML = product.sizes
+          .map((size) => `<option value="${size}"${size === modalSize ? ' selected' : ''}>${size}</option>`)
+          .join('');
+
+        setModalImage(modalImageIndex);
+        syncModalStock();
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+      }
+
+      function closeProductModal() {
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+        activeModalProductIndex = null;
+      }
+
+      grid.querySelectorAll('.rtw-gallery-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const productIndex = Number(card.dataset.cardIndex);
+          const mainImage = grid.querySelector(`[data-main-image="${productIndex}"]`);
+          openProductModal(productIndex, mainImage ? mainImage.getAttribute('src') : undefined);
+        });
+      });
+
+      grid.querySelectorAll('.product-card-thumb').forEach((button) => {
+        button.addEventListener('click', () => {
+          const cardIndex = button.dataset.cardIndex;
+          const mainImage = grid.querySelector(`[data-main-image="${cardIndex}"]`);
+          if (!mainImage) return;
+
+          mainImage.src = button.dataset.image;
+          mainImage.alt = button.dataset.alt;
+
+          grid
+            .querySelectorAll(`.product-card-thumb[data-card-index="${cardIndex}"]`)
+            .forEach((thumb) => thumb.classList.remove('active'));
+          button.classList.add('active');
+        });
+      });
+
+      modalPrevButton.addEventListener('click', () => {
+        setModalImage(modalImageIndex - 1);
+      });
+
+      modalNextButton.addEventListener('click', () => {
+        setModalImage(modalImageIndex + 1);
+      });
+
+      modalSizeEl.addEventListener('change', () => {
+        modalSize = modalSizeEl.value;
+        modalQty = 1;
+        syncModalStock();
+      });
+
+      modal.querySelector('[data-modal-minus]').addEventListener('click', () => {
+        modalQty = Math.max(1, modalQty - 1);
+        syncModalStock();
+      });
+
+      modal.querySelector('[data-modal-plus]').addEventListener('click', () => {
+        modalQty = Math.min(getSelectedStock(), modalQty + 1);
+        syncModalStock();
+      });
+
+      modalAddButton.addEventListener('click', () => {
+        const product = products[activeModalProductIndex];
+        if (!product) return;
+
+        addStoreItem({
+          sku: product.sku,
+          name: product.name,
+          category: product.category,
+          gender: product.gender,
+          size: modalSize,
+          color: product.colorway,
+          stock: getSelectedStock(),
+          price: product.price,
+          qty: modalQty,
+          image: modalImage || product.coverImage,
+        });
+
+        modalAddButton.textContent = 'Added';
+        window.setTimeout(() => {
+          syncModalStock();
+        }, 900);
+      });
+
+      modal.querySelectorAll('[data-modal-close]').forEach((button) => {
+        button.addEventListener('click', closeProductModal);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) {
+          closeProductModal();
+        }
+      });
+    }
+
+    async function loadCollections() {
+      try {
+        const response = await fetch('/api/rtw-catalog');
+        if (!response.ok) {
+          throw new Error(`RTW catalog request failed with status ${response.status}`);
+        }
+
+        const collections = await response.json();
+        renderCollections(collections);
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = `
+          <article class="product-card">
+            <div class="product-card-info">
+              <span class="category">Catalog error</span>
+              <h3>Unable to load the catalogue right now.</h3>
+            </div>
+          </article>
+        `;
+      }
+    }
+
+    loadCollections();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
