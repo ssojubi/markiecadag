@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Bridal Catalogue — Brainer Atelier</title>
+  <meta name="description" content="Discover the Brainer Atelier Bridal Catalogue — ethereal, romantic and timeless bridal gown collections crafted with artisanal excellence. All rights reserved by Markiecadag."/>
+  <meta property="og:title" content="Bridal Catalogue — Brainer Atelier"/>
+  <meta property="og:description" content="Ethereal bridal gowns crafted with artisanal excellence."/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+</head>
+<body>
+
+<!-- CURTAIN INTRO -->
+<div class="curtain" id="curtain">
+  <div class="curtain-logo">
+    <img src="assets/images/brainer_logo.png" alt="Brainer Atelier"/>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  Now Accepting Bridal Appointments for 2026 — Schedule Your Private Consultation
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-brand">
+      <img src="assets/images/brainer_logo.png" class="logo-img" alt="Brainer Atelier"/>
+    </div>
+    <nav class="navbar-links" id="navLinks">
+      <a href="#catalogue" class="nav-link">Catalogue</a>
+      <a href="#collections" class="nav-link">Collections</a>
+      <a href="#atelier" class="nav-link">The Atelier</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="#inquiry" class="nav-cta">Book a Fitting</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#catalogue">Catalogue</a>
+    <a href="#collections">Collections</a>
+    <a href="#atelier">The Atelier</a>
+    <a href="#process">Process</a>
+    <a href="#inquiry">Book a Fitting</a>
+  </nav>
+</header>
+
+<!-- HERO SLIDER -->
+<section class="hero-slider" id="home">
+  <!-- Slide 1 -->
+  <div class="slide active" id="slide1">
+    <div class="slide-bg"></div>
+    <div class="slide-shimmer"></div>
+    <div class="slide-veil"></div>
+    <div class="slide-content">
+      <span class="slide-label">Brainer Atelier · 2026 Bridal Collection</span>
+      <span class="slide-title">Where Dreams Become Gowns</span>
+      <span class="slide-sub">An Atelier of Ethereal Bridal Couture</span>
+      <div class="slide-line"></div>
+      <p class="slide-desc">Each gown is an intimate dialogue between your vision and our artisanship — conceived in dreams, constructed in silk and lace, remembered always.</p>
+      <div class="slide-cta">
+        <a href="#catalogue" class="btn btn-dark" style="background:white;color:#0f0f0f;border:1px solid white;">Explore the Catalogue</a>
+        <a href="#inquiry" class="btn btn-outline-white">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+  <!-- Slide 2 -->
+  <div class="slide" id="slide2">
+    <div class="slide-bg"></div>
+    <div class="slide-shimmer"></div>
+    <div class="slide-veil"></div>
+    <div class="slide-content">
+      <span class="slide-label">Brainer Atelier · The Collections</span>
+      <span class="slide-title">Crafted with Soul</span>
+      <span class="slide-sub">Ethereal · Mystique · Romance · Classic</span>
+      <div class="slide-line"></div>
+      <p class="slide-desc">Four distinct collections — each a world unto itself, unified by an unwavering commitment to artisanal excellence and bridal beauty.</p>
+      <div class="slide-cta">
+        <a href="#collections" class="btn btn-dark" style="background:white;color:#0f0f0f;border:1px solid white;">View Collections</a>
+        <a href="#atelier" class="btn btn-outline-white">Our Story</a>
+      </div>
+    </div>
+  </div>
+  <!-- Slide 3 -->
+  <div class="slide" id="slide3">
+    <div class="slide-bg"></div>
+    <div class="slide-shimmer"></div>
+    <div class="slide-veil"></div>
+    <div class="slide-content">
+      <span class="slide-label">Brainer Atelier · Bespoke Service</span>
+      <span class="slide-title">Your Day, Your Gown</span>
+      <span class="slide-sub">Private Consultations Now Open for 2026</span>
+      <div class="slide-line"></div>
+      <p class="slide-desc">Begin your bridal journey with a private atelier appointment. Our designers will bring your vision to life — from first sketch to final fitting.</p>
+      <div class="slide-cta">
+        <a href="#inquiry" class="btn btn-dark" style="background:white;color:#0f0f0f;border:1px solid white;">Book a Fitting</a>
+        <a href="#process" class="btn btn-outline-white">Our Process</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="slider-arrow slider-arrow-prev" id="sliderPrev" aria-label="Previous">&#8592;</button>
+  <button class="slider-arrow slider-arrow-next" id="sliderNext" aria-label="Next">&#8594;</button>
+
+  <div class="slider-dots" id="sliderDots">
+    <button class="slider-dot active" data-index="0" aria-label="Slide 1"></button>
+    <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+    <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="slider-counter" id="sliderCounter">01 / 03</div>
+
+  <div class="slider-progress">
+    <div class="slider-progress-bar" id="sliderProgressBar"></div>
+  </div>
+
+  <div class="hero-scroll" style="z-index:10;">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- COLLECTIONS STRIPS -->
+<section class="section-sm" id="collections" style="background:var(--cream);padding:0;">
+  <div class="collections-strip">
+    <div class="collection-card reveal">
+      <div class="collection-card-bg" style="background:linear-gradient(145deg,#f5f0eb,#e8d5c4);"></div>
+      <div class="collection-card-overlay"></div>
+      <div class="blank-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;color:rgba(255,255,255,0.2);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+      <div class="collection-card-label">
+        <span>Collection I</span>
+        <h3>Ethereal</h3>
+        <p>Light as cloud, pure as morning light — gowns that float and shimmer.</p>
+      </div>
+    </div>
+    <div class="collection-card reveal reveal-delay-1">
+      <div class="collection-card-bg" style="background:linear-gradient(145deg,#e8d5c4,#c9a99a);"></div>
+      <div class="collection-card-overlay"></div>
+      <div class="blank-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;color:rgba(255,255,255,0.2);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <div class="collection-card-label">
+        <span>Collection II</span>
+        <h3>Mystique</h3>
+        <p>Enchanting silhouettes that carry an air of timeless mystery.</p>
+      </div>
+    </div>
+    <div class="collection-card reveal reveal-delay-2">
+      <div class="collection-card-bg" style="background:linear-gradient(145deg,#d4b896,#b8966a);"></div>
+      <div class="collection-card-overlay"></div>
+      <div class="blank-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;color:rgba(255,255,255,0.2);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      </div>
+      <div class="collection-card-label">
+        <span>Collection III</span>
+        <h3>Romance</h3>
+        <p>Soft florals and tender details celebrating love in every stitch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOGUE -->
+<section class="section" id="catalogue" style="background:var(--ivory);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Bridal Catalogue</span>
+      <h2>The <em>Collection</em></h2>
+      <div class="gold-divider"></div>
+      <p>Each gown is available for bespoke customisation. Photographs coming soon — visit our atelier for exclusive viewings.</p>
+    </div>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="All">All Gowns</button>
+      <button class="filter-btn" data-filter="Ethereal">Ethereal</button>
+      <button class="filter-btn" data-filter="Mystique">Mystique</button>
+      <button class="filter-btn" data-filter="Romance">Romance</button>
+      <button class="filter-btn" data-filter="Classic">Classic</button>
+    </div>
+    <div class="catalogue-grid" id="catalogueGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / ATELIER -->
+<section class="section" id="atelier" style="background:var(--cream);">
+  <div class="container">
+    <div class="about-split">
+      <div class="about-img-wrap reveal">
+        <div class="blank-overlay">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="stroke:var(--rose);stroke-width:1;opacity:0.5;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose);opacity:0.6;margin-top:0.5rem;">Atelier Photo</span>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <span class="eyebrow">The Atelier</span>
+        <h2>Crafted with <em>Soul</em>, Worn with Grace</h2>
+        <p>At Brainer Atelier, every bridal gown begins as a whisper — a bride's deepest dream of how she wishes to feel on her most precious day. We transform that whisper into a masterpiece of fabric, structure, and embellishment.</p>
+        <p>Our team of artisans brings decades of couture experience to each creation, hand-selecting the finest laces, silks, and tulles from across the globe to ensure every gown is a singular work of wearable art.</p>
+        <p>Based in the Philippines, we have dressed brides from all walks of life — each one walking down the aisle in a gown that is undeniably, completely hers.</p>
+        <img src="assets/images/BC Brand silver.png" alt="Brainer Atelier" class="signature-img" style="width: 240px; max-width: 100%; height: auto; margin: 1.5rem 0 2rem; opacity: 0.65; object-fit: contain; display: block;"/>
+        <a href="#inquiry" class="btn btn-dark">Schedule a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Our Process</span>
+      <h2 style="color:var(--white);">From <em style="color:var(--rose);">Dream</em> to Reality</h2>
+      <div class="gold-divider"></div>
+      <p>A seamless, intimate journey from first consultation to final fitting.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <svg class="process-step-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="process-step-num">01</span>
+        <h4>Consultation</h4>
+        <p>We begin with an intimate conversation to understand your vision, style, and the feeling you want to embody on your wedding day.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <svg class="process-step-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span class="process-step-num">02</span>
+        <h4>Design & Fabric</h4>
+        <p>Our designers sketch your custom gown and present a curated selection of the world's finest fabrics for your approval.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <svg class="process-step-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <span class="process-step-num">03</span>
+        <h4>Atelier Creation</h4>
+        <p>Your gown is meticulously constructed by hand — every seam, every bead, every embroidery placed with precision and love.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <svg class="process-step-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="process-step-num">04</span>
+        <h4>Final Fitting</h4>
+        <p>You step into your gown for the first time. We perfect every detail until it fits like it was born for your body.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRY / CONTACT -->
+<section class="inquiry-section" id="inquiry">
+  <div class="container">
+    <span class="eyebrow">Begin Your Journey</span>
+    <h2>Book a Private <em>Consultation</em></h2>
+    <div class="gold-divider" style="margin:1rem auto 1.5rem;"></div>
+    <p>Ready to begin? Share a few details and our bridal team will reach out to schedule your private atelier appointment.</p>
+    <form class="inquiry-form" id="inquiryForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inqName">Full Name</label>
+          <input type="text" id="inqName" name="name" placeholder="Your name" required/>
+        </div>
+        <div class="form-group">
+          <label for="inqEmail">Email Address</label>
+          <input type="email" id="inqEmail" name="email" placeholder="your@email.com" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inqPhone">Phone Number</label>
+          <input type="tel" id="inqPhone" name="phone" placeholder="+63 917 000 0000"/>
+        </div>
+        <div class="form-group">
+          <label for="inqWedding">Wedding Date</label>
+          <input type="date" id="inqWedding" name="weddingDate"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inqGown">Gown of Interest</label>
+        <select id="inqGown" name="gown">
+          <option value="">Select a gown or style...</option>
+          <option>Dress 1 – Ethereal Collection</option>
+          <option>Dress 2 – Ethereal Collection</option>
+          <option>Dress 3 – Ethereal Collection</option>
+          <option>Dress 4 – Mystique Collection</option>
+          <option>Dress 5 – Mystique Collection</option>
+          <option>Dress 6 – Mystique Collection</option>
+          <option>Dress 7 – Romance Collection</option>
+          <option>Dress 8 – Romance Collection</option>
+          <option>Dress 9 – Romance Collection</option>
+          <option>Dress 10 – Classic Collection</option>
+          <option>Dress 11 – Classic Collection</option>
+          <option>Dress 12 – Classic Collection</option>
+          <option>I'm open to suggestions</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inqMessage">Your Vision</label>
+        <textarea id="inqMessage" name="message" placeholder="Describe your dream gown, wedding theme, or any details you'd like to share..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark" style="align-self:center;padding:1rem 3rem;">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" onclick="if(event.target===this)closeLightbox()">
+  <div class="lightbox-panel">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <div class="lightbox-img">
+      <div class="blank-placeholder" style="color:var(--rose);">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="currentColor" opacity="0.4"/></svg>
+        <span>Photo Coming Soon</span>
+      </div>
+    </div>
+    <div class="lightbox-info">
+      <span class="collection-tag" id="lbCollection"></span>
+      <h3 id="lbTitle"></h3>
+      <p id="lbDetail"></p>
+      <div class="lightbox-cta">
+        <a href="#inquiry" class="btn btn-dark" onclick="closeLightbox()">Inquire About This Gown</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/images/brainer_logo.png" class="logo-img-footer" alt="Brainer Atelier"/>
+      <p>Bridal couture crafted with intention, artistry, and an unwavering devotion to your most luminous moment.</p>
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">&#9632;</a>
+        <a href="#" class="social-link" aria-label="Facebook">&#9632;</a>
+        <a href="#" class="social-link" aria-label="TikTok">&#9632;</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Catalogue</h5>
+      <a href="#catalogue">All Gowns</a>
+      <a href="#collections">Ethereal Collection</a>
+      <a href="#collections">Mystique Collection</a>
+      <a href="#collections">Romance Collection</a>
+      <a href="#collections">Classic Collection</a>
+    </div>
+    <div class="footer-col">
+      <h5>Atelier</h5>
+      <a href="#atelier">About Us</a>
+      <a href="#process">Our Process</a>
+      <a href="#inquiry">Book a Fitting</a>
+      <a href="#inquiry">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Brainer Atelier. All Rights Reserved by Markiecadag.</span>
+    <span>Crafted with love in the Philippines</span>
+  </div>
+</footer>
+
+<!-- AI CHAT WIDGET -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel-header">
+      <div class="chat-panel-title">
+        <div class="chat-status-dot"></div>
+        <div>
+          <strong>Brainer Atelier</strong>
+          <span class="chat-status-label">AI Bridal Assistant</span>
+        </div>
+      </div>
+      <button class="chat-panel-close" id="chatClose" aria-label="Close chat">&#10005;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg chat-msg--bot">
+        <div class="chat-bubble">
+          Hello! I'm the Brainer Atelier bridal assistant 👗<br>How can I help you today? You can ask about our gown collections, fitting appointments, or how to get started.
+        </div>
+        <span class="chat-time">Now</span>
+      </div>
+    </div>
+    <div class="chat-quick-replies" id="chatQuickReplies">
+      <button class="chat-quick" data-msg="Tell me about your collections">Our Collections</button>
+      <button class="chat-quick" data-msg="How do I book a fitting?">Book a Fitting</button>
+      <button class="chat-quick" data-msg="What is the ordering process?">Ordering Process</button>
+    </div>
+    <form class="chat-input-row" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off"/>
+      <button type="submit" class="chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+  <button class="chat-fab" id="chatFab" aria-label="Open chat">
+    <svg class="chat-fab-icon chat-fab-icon--open" viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="chat-fab-icon chat-fab-icon--close" viewBox="0 0 24 24" fill="none" width="20" height="20" style="display:none"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <span class="chat-fab-pulse"></span>
+  </button>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
