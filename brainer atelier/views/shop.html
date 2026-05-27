@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop — Fashion Brand</title>
+  <link rel="icon" type="image/x-icon" href="/images/brainer_logo.png">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/shop.css" />
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">BRAND</a>
+    <div class="nav-links">
+      <a href="/shop">Shop</a>
+      <a href="/cart">Cart (<span id="cart-count">0</span>)</a>
+      <a href="/login" id="nav-login">Login</a>
+      <a href="#" id="nav-logout" style="display:none;">Logout</a>
+    </div>
+  </nav>
+
+  <section class="shop-page">
+    <div class="filters">
+      <button class="filter-btn active" data-category="">All</button>
+      <button class="filter-btn" data-category="tops">Tops</button>
+      <button class="filter-btn" data-category="bottoms">Bottoms</button>
+      <button class="filter-btn" data-category="dresses">Dresses</button>
+      <button class="filter-btn" data-category="accessories">Accessories</button>
+    </div>
+    <div class="product-grid" id="product-list"></div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/images/brainer_logo_white.png" alt="Brainer Atelier logo" class="logo-img-footer">
+        <p>Bespoke Filipino fashion house focused on couture, RTW, family collections, and compliant online selling.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <a href="/rtw">RTW</a>
+        <a href="/filipiniana">Barong & Filipiniana</a>
+        <a href="/kidsandteens">Kids & Teen</a>
+        <a href="/custom">Custom Couture</a>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <a href="#" onclick="openLegalModal('terms', event)">Terms & Conditions</a>
+        <a href="#" onclick="openLegalModal('privacy', event)">Privacy Policy</a>
+        <a href="#" onclick="openLegalModal('shipping', event)">Shipping Policy</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="/about">About Us</a>
+        <a href="/checkout">Checkout</a>
+        <a href="/cart">Cart</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brainer Atelier. All rights reserved.</span>
+      <div>
+        <a href="#" onclick="openLegalModal('privacy', event)">Privacy Policy</a>
+        <a href="#" onclick="openLegalModal('terms', event)">Terms & Conditions</a>
+        <a href="#" onclick="openLegalModal('shipping', event)">Shipping Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chat-widget">
+    <button class="chat-btn" title="Customer Support">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </button>
+    <div class="chat-panel" hidden>
+      <div class="chat-panel-header">
+        <strong>Support and AI Assistant</strong>
+        <button type="button" data-chat-close>Close</button>
+      </div>
+      <p class="chat-copy">Ask about appointments, courier delivery, or RTW stock. This panel captures support requests.</p>
+      <form data-support-form class="support-form">
+        <input type="text" name="name" placeholder="Your name">
+        <input type="email" name="email" placeholder="Email address">
+        <textarea name="message" rows="4" placeholder="How can we help?"></textarea>
+        <button type="submit" class="btn btn-dark w-full">Send Request</button>
+      </form>
+      <p class="support-reply" data-support-reply></p>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/shop.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
